@@ -9,8 +9,8 @@ using PointService.DataAccess;
 
 namespace PointService.DataAccess.Migrations
 {
-    [DbContext(typeof(PoinServiceContext))]
-    [Migration("20220805103422_Initial")]
+    [DbContext(typeof(PointServiceContext))]
+    [Migration("20220805130129_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

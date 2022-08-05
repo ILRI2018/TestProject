@@ -3,9 +3,9 @@ using PointService.DataAccess.Models;
 
 namespace PointService.DataAccess
 {
-    public class PoinServiceContext : DbContext
+    public class PointServiceContext : DbContext
     {
-        public PoinServiceContext(DbContextOptions<PoinServiceContext> options) : base(options)
+        public PointServiceContext(DbContextOptions<PointServiceContext> options) : base(options)
         {
 
         }

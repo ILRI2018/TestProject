@@ -8,14 +8,14 @@ namespace PointService.DataAccess.Uow
 {
     public class Uow : IUow
     {
-        private readonly PoinServiceContext _context;
+        private readonly PointServiceContext _context;
 
         private IGenericRepository<Client> _clientEntity;
         private IGenericRepository<Transaction> _transactionEntity;
 
         private bool _disposed = false;
 
-        public Uow(PoinServiceContext context)
+        public Uow(PointServiceContext context)
         {
             _context = context;
         }

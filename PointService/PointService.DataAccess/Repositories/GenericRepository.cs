@@ -8,9 +8,9 @@ namespace PointService.DataAccess.Repositories
 {
     public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        private readonly PoinServiceContext _context;
+        private readonly PointServiceContext _context;
         private readonly DbSet<T> _dataSet;
-        public GenericRepository(PoinServiceContext context)
+        public GenericRepository(PointServiceContext context)
         {
             _context = context;
             _dataSet = context.Set<T>();

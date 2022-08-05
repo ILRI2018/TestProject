@@ -8,8 +8,8 @@ using PointService.DataAccess;
 
 namespace PointService.DataAccess.Migrations
 {
-    [DbContext(typeof(PoinServiceContext))]
-    partial class PoinServiceContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(PointServiceContext))]
+    partial class PointServiceContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
