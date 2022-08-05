@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 public interface IGenericRepository<T> where T : class
@@ -11,4 +12,5 @@ public interface IGenericRepository<T> where T : class
     void AddRange(IEnumerable<T> entities);
     void Remove(T entity);
     void RemoveRange(IEnumerable<T> entities);
+    IQueryable<T> GetQueryable();
 }

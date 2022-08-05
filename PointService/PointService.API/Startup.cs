@@ -6,7 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PointService.DataAccess;
+using PointService.DataAccess.Interfaces;
 using PointService.DataAccess.Repositories;
+using PointService.DataAccess.Uow;
 
 namespace PointService.API
 {
@@ -33,6 +35,7 @@ namespace PointService.API
                 Configuration.GetConnectionString("DefaultConnection"),
                 builder => builder.MigrationsAssembly(typeof(PoinServiceContext).Assembly.FullName)));
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IUow,Uow>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
