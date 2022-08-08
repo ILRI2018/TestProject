@@ -16,9 +16,9 @@ namespace PointService.Web.Controllers
             _pointManager = pointManager;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var result = await _pointManager.GetPointHistoryClients();
+            var result = _pointManager.GetPointHistoryClients();
             return View(result);
         }
     }

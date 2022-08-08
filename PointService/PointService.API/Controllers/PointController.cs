@@ -17,9 +17,9 @@ namespace PointService.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<PointHistoryClientsVM> PointHistoryClients()
+        public PointHistoryClientsVM PointHistoryClients()
         {
-            return await _pointManager.GetPointHistoryClients();
+            return _pointManager.GetPointHistoryClients();
         }
     }
 }

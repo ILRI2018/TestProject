@@ -6,8 +6,6 @@ using PointService.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using NLog;
 
 namespace PointService.BL
 {
@@ -28,18 +26,18 @@ namespace PointService.BL
             _logger = logger;
         }
 
-        public async Task<PointHistoryClientsVM> GetPointHistoryClients()
+        public PointHistoryClientsVM GetPointHistoryClients()
         {
             var result = new PointHistoryClientsVM();
 
             try
             {
                 _logger.LogInfo("process point history");
-                var clients = await _uow.ClientEntity.GetQueryable()
+                var clients =   _uow.ClientEntity.GetQueryable()
                     .Include(x => x.Transactions)
-                    .ToListAsync();
+                    .ToList();
 
-                var clientVM = result.Clients = _mapper.Map<List<ClientVM>>(clients);
+                var clientVM = _mapper.Map<List<ClientVM>>(clients);
                 var summ = decimal.Zero;
                 foreach (var client in clientVM)
                 {
@@ -48,31 +46,29 @@ namespace PointService.BL
                         var totalTransactions = client.Transactions.Where(x => x.DateCreated.Month == month).Sum(x => GetPoints(x.Cost));
                         client.TotalSumPointsMonths.Add(month, totalTransactions);
                     }
-
-                    foreach (var ff in client.TotalSumPointsMonths)
-                    {
-                        summ += ff.Value;
-                    }
-
+                    summ = client.TotalSumPointsMonths.Sum(x => x.Value);
                     client.OverTotalPointsForThreeMonth = summ;
+
+
                     summ = decimal.Zero;
+                }
+                result.Clients = clientVM;
 
-                    decimal GetPoints(decimal costTransaction)
+                decimal GetPoints(decimal costTransaction)
+                {
+                    var resultPoint = decimal.Zero;
+
+                    if (costTransaction > FiftyDollars)
                     {
-                        var resultPoint = decimal.Zero;
-
-                        if (costTransaction > FiftyDollars)
-                        {
-                            resultPoint += (costTransaction - FiftyDollars) * One;
-                        }
-
-                        if (costTransaction > OneHundredDollars)
-                        {
-                            resultPoint += (costTransaction - OneHundredDollars) * One;
-                        }
-
-                        return resultPoint;
+                        resultPoint += (costTransaction - FiftyDollars) * One;
                     }
+
+                    if (costTransaction > OneHundredDollars)
+                    {
+                        resultPoint += (costTransaction - OneHundredDollars) * One;
+                    }
+
+                    return resultPoint;
                 }
             }
             catch (Exception ex)
