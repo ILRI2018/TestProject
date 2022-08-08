@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PointService.BL.Interfaces;
 using PointService.ViewModels;
-using System.Threading.Tasks;
 
 namespace PointService.API.Controllers
 {
