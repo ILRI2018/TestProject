@@ -1,15 +1,18 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using NLog.Web;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace PointService.API
+namespace PointService.Web
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -17,7 +20,7 @@ namespace PointService.API
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>().UseNLog();
+                    webBuilder.UseStartup<Startup>();
                 });
     }
 }

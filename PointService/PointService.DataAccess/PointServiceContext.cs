@@ -8,7 +8,8 @@ namespace PointService.DataAccess
     {
         public PointServiceContext(DbContextOptions<PointServiceContext> options) : base(options)
         {
-
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
 
         public DbSet<Client> Clients { get; set; }

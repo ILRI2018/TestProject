@@ -1,0 +1,55 @@
+﻿@model PointHistoryClientsVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<Html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="panel-body">
+        <h2> Here is the list of history point clients</h2>
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Transaction date</th>
+                    <th>Transaction cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var client in Model.Clients)
+                {
+                    <tr>
+                        @foreach (var sum in client.TotalSumPointsMonths)
+                        {
+                        <tr>
+                            @foreach (var transaction in client.Transactions.Where(x => x.DateCreated.Month == sum.Key))
+                            {
+                            <tr>
+                                <td>@client.Name</td>
+                                <td>@transaction.DateCreated</td>
+                                <td>@transaction.Cost</td>
+                            </tr>
+                        }
+                            <tr>
+                                <td>Total points for the full month number @sum.Key = @sum.Value</td>
+                            </tr>
+
+                            </tr>
+                        }
+                        </tr>
+                        <tr>
+                            <td>Over total points for three month @client.OverTotalPointsForThreeMonth</td>
+                        </tr>
+                    }
+            </tbody>
+        </table>
+    </div>
+</body>
+</Html>
+
