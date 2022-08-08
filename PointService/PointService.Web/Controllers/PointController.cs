@@ -1,16 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PointService.BL.Interfaces;
-using System.Threading.Tasks;
 
 namespace PointService.Web.Controllers
 {
-    public class HomeController : Controller
+    public class PointController : Controller
     {
         private readonly IPointManager _pointManager;
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<PointController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, IPointManager pointManager)
+        public PointController(ILogger<PointController> logger, IPointManager pointManager)
         {
             _logger = logger;
             _pointManager = pointManager;
@@ -19,7 +18,8 @@ namespace PointService.Web.Controllers
         public IActionResult Index()
         {
             var result = _pointManager.GetPointHistoryClients();
-            return View(result);
+
+            return result == null ? NotFound() : View(result);
         }
     }
 }

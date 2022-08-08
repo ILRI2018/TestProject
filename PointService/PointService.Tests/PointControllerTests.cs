@@ -1,6 +1,8 @@
+﻿
 using AutoMapper;
 using Moq;
 using PointService.API;
+using PointService.API.Controllers;
 using PointService.BL;
 using PointService.BL.Interfaces;
 using PointService.DataAccess.Interfaces;
@@ -13,10 +15,11 @@ using Xunit;
 
 namespace PointService.Tests
 {
-    public class PointManagetTests
+    public class PointControllerTests
     {
         private readonly IMapper _mapper;
-        public PointManagetTests()
+
+        public PointControllerTests()
         {
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -45,6 +48,7 @@ namespace PointService.Tests
                     new Transaction { Id = Guid.NewGuid(), ClientId = client.Id, DateCreated = DateTime.Now.AddMonths(-2), Cost = 520 },
                     new Transaction { Id = Guid.NewGuid(), ClientId = client.Id, DateCreated = DateTime.Now.AddMonths(-2), Cost = 5 },
              };
+
             client.Transactions = clientData;
 
             var clients = new Client[] { client };
@@ -55,19 +59,16 @@ namespace PointService.Tests
             var _mockLogger = new Mock<ILoggerManager>();
 
             PointManager pointManager = new PointManager(_mockUow.Object, _mapper, _mockLogger.Object);
-            var result = pointManager.GetPointHistoryClients();
+            PointController pointController = new PointController(pointManager);
 
-            var totalFirstMonth = result.Clients.First().TotalSumPointsMonths[DateTime.Now.AddMonths(-2).Month];
-            var totalSecondMonth = result.Clients.First().TotalSumPointsMonths[DateTime.Now.AddMonths(-1).Month];
-            var totalThirdMonth = result.Clients.First().TotalSumPointsMonths[DateTime.Now.Month];
-
-            var totalAllMonth = totalFirstMonth + totalSecondMonth + totalThirdMonth;
+            PointHistoryClientsVM result = pointController.PointHistoryClients();
 
             Assert.NotNull(result.Clients);
-            Assert.Equal(980, totalFirstMonth);
-            Assert.Equal(1980, totalSecondMonth);
-            Assert.Equal(380, totalThirdMonth);
-            Assert.Equal(3340, totalAllMonth);
+            Assert.True(result.Clients.Any());
+            Assert.True(client.Name == result.Clients.First().Name);
+            Assert.True(client.Id == result.Clients.First().Id);
+            Assert.Equal(9, result.Clients.First().Transactions.Count);
+
         }
     }
 }
