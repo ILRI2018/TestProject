@@ -5,6 +5,6 @@ namespace PointService.BL.Interfaces
 {
     public interface IPointManager
     {
-        Task<PointHistoryClientsVM> GetPointHistoryClients();
+        PointHistoryClientsVM GetPointHistoryClients();
     }
 }

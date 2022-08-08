@@ -10,6 +10,11 @@ namespace PointService.DataAccess.Repositories
     {
         private readonly PointServiceContext _context;
         private readonly DbSet<T> _dataSet;
+
+        public GenericRepository()
+        {
+        }
+
         public GenericRepository(PointServiceContext context)
         {
             _context = context;

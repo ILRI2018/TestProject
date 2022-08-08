@@ -12,13 +12,7 @@ namespace Calefy.DataAccesLayer
             var clien2 = new Client { Id = Guid.NewGuid(), Name = "Dmitriy Kavalenka", };
             var client3 = new Client { Id = Guid.NewGuid(), Name = "Karina Kashuba", };
 
-            modelBuilder.Entity<Client>().HasData(
-                new Client[]
-                {
-                    clien1,
-                    clien2,
-                    client3
-                });
+            modelBuilder.Entity<Client>().HasData(new Client[] { clien1, clien2, client3 });
 
             modelBuilder.Entity<Transaction>().HasData(
                 new Transaction[]
