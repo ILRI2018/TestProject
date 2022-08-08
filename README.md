@@ -13,7 +13,13 @@ RESULT
 ![image](https://user-images.githubusercontent.com/38050766/183425239-76fe9473-6d15-44a3-afcf-415ba5aeed38.png)
 ![image](https://user-images.githubusercontent.com/38050766/183425469-37810aa6-333a-4ee9-9607-c4beb8dfbf47.png)
 
+•	You API should contain clear Documentation (a well formatted README.md and comments in code, sample Request Response formats, how to invoke your API by any client), a Health Check Endpoint to check whether the service is running or not by a monitoring tool.
 
+If you want to see the application documentation you need to run application and go tab Swagger UI
+
+DOCUMENTATION
+
+![image](https://user-images.githubusercontent.com/38050766/183432034-ce9e9428-1843-4261-ab7a-f96afc262e3e.png)
 
 
 
