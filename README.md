@@ -21,6 +21,18 @@ DOCUMENTATION
 
 ![image](https://user-images.githubusercontent.com/38050766/183432034-ce9e9428-1843-4261-ab7a-f96afc262e3e.png)
 
+Response format
+![image](https://user-images.githubusercontent.com/38050766/183647765-76c0f867-125f-4e97-897f-b400135f9487.png)
+Health Check Enpoint
+![image](https://user-images.githubusercontent.com/38050766/183648069-1bca304a-1aab-47c1-b5eb-3261b15bdac5.png)
+Result Enpoint
+[response_166004859474.txt](https://github.com/ILRI2018/TestProject/files/9290479/response_166004859474.txt)
+
+
+
+
+
+
 
 
 
