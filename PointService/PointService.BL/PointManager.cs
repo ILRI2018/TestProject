@@ -41,7 +41,7 @@ namespace PointService.BL
                 var total = decimal.Zero;
                 foreach (var client in clientVM)
                 {
-                    foreach (var month in client.Transactions.GroupBy(x => x.DateCreated.Month).Select(x => x.Key))
+                    foreach (var month in client.Transactions.GroupBy(x => x.DateCreated.Month).OrderBy(x=> x.Key).Select(x => x.Key))
                     {
                         var totalTransactions = client.Transactions.Where(x => x.DateCreated.Month == month).Sum(x => GetPoints(x.Cost));
                         client.TotalSumPointsMonths.Add(month, totalTransactions);
