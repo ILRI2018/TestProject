@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using PointService.BL.Interfaces;
 
 namespace PointService.Web.Controllers
@@ -7,11 +6,9 @@ namespace PointService.Web.Controllers
     public class PointController : Controller
     {
         private readonly IPointManager _pointManager;
-        private readonly ILogger<PointController> _logger;
 
-        public PointController(ILogger<PointController> logger, IPointManager pointManager)
+        public PointController(IPointManager pointManager)
         {
-            _logger = logger;
             _pointManager = pointManager;
         }
 
