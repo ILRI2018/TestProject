@@ -38,7 +38,7 @@ namespace PointService.BL
                     .ToList();
 
                 var clientVM = _mapper.Map<List<ClientVM>>(clients);
-                var summ = decimal.Zero;
+                var total = decimal.Zero;
                 foreach (var client in clientVM)
                 {
                     foreach (var month in client.Transactions.GroupBy(x => x.DateCreated.Month).Select(x => x.Key))
@@ -46,11 +46,11 @@ namespace PointService.BL
                         var totalTransactions = client.Transactions.Where(x => x.DateCreated.Month == month).Sum(x => GetPoints(x.Cost));
                         client.TotalSumPointsMonths.Add(month, totalTransactions);
                     }
-                    summ = client.TotalSumPointsMonths.Sum(x => x.Value);
-                    client.OverTotalPointsForThreeMonth = summ;
+                    total = client.TotalSumPointsMonths.Sum(x => x.Value);
+                    client.OverTotalPointsForThreeMonth = total;
 
 
-                    summ = decimal.Zero;
+                    total = decimal.Zero;
                 }
                 result.Clients = clientVM;
 
