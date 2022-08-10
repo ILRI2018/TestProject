@@ -1,5 +1,4 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
 using Moq;
 using PointService.API;
 using PointService.API.Controllers;
@@ -11,6 +10,7 @@ using PointService.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using Xunit;
 
 namespace PointService.Tests
@@ -61,13 +61,15 @@ namespace PointService.Tests
             PointManager pointManager = new PointManager(_mockUow.Object, _mapper, _mockLogger.Object);
             PointController pointController = new PointController(pointManager);
 
-            PointHistoryClientsVM result = pointController.PointHistoryClients();
+            var result = pointController.PointHistoryClients();
 
             Assert.NotNull(result.Clients);
             Assert.True(result.Clients.Any());
             Assert.True(client.Name == result.Clients.First().Name);
             Assert.True(client.Id == result.Clients.First().Id);
             Assert.Equal(9, result.Clients.First().Transactions.Count);
+
+            Assert.IsType<PointHistoryClientsVM>(result);
 
         }
     }

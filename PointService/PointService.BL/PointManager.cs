@@ -49,7 +49,6 @@ namespace PointService.BL
                     total = client.TotalSumPointsMonths.Sum(x => x.Value);
                     client.OverTotalPointsForThreeMonth = total;
 
-
                     total = decimal.Zero;
                 }
                 result.Clients = clientVM;
